@@ -1,9 +1,10 @@
 import React from 'react'
+import Nav from './Nav'
 
-function Home() {
+function Home({username}) {
     return (
         <div>
-            HOME
+            <Nav username={username}/>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef} from "react";
 import { auth } from "./firebase";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
@@ -8,47 +8,7 @@ function Login() {
     const history = useHistory();
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    const validpattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-
-    var actionCodeSettings = {
-        url: "http://localhost:3000",
-        iOS: {
-            bundleId: "com.example.ios",
-        },
-        android: {
-            packageName: "com.example.android",
-            installApp: true,
-            minimumVersion: "12",
-        },
-        handleCodeInApp: true,
-        dynamicLinkDomain: "animerecs.page.link",
-    };
-
-    const register = (e) => {
-        e.preventDefault();
-        if (validpattern.test(emailRef.current.value)) {
-            auth.createUserWithEmailAndPassword(
-                emailRef.current.value,
-                passwordRef.current.value
-            )
-                .then((user) => {
-                    console.log("SIGNED IN");
-                    auth.currentUser
-                        .sendEmailVerification(actionCodeSettings)
-                        .then(() => {
-                            history.push("/");
-                        })
-                        .catch((err) => {
-                            alert(err.message);
-                        });
-                })
-                .catch((err) => {
-                    alert(err.message);
-                });
-        } else {
-            alert("INVALID EMAIL");
-        }
-    };
+    
 
     const signin = (e) => {
         e.preventDefault();
@@ -57,8 +17,8 @@ function Login() {
             emailRef.current.value,
             passwordRef.current.value
         )
-            .then(() => {
-                history.push("/");
+            .then((user) => {
+                history.push(`/${user.user.uid}`);
                 console.log("LOGGED IN");
             })
             .catch((err) => {
@@ -82,10 +42,11 @@ function Login() {
                 <button type="submit" onClick={signin}>
                     Sign In
                 </button>
-                <button type="submit" id="reg_btn" onClick={register}>
+                <button type="submit" id="reg_btn" onClick={()=> history.push("/signup")}>
                     Sign Up
                 </button>
             </form>
+            
         </div>
     );
 }
