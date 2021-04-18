@@ -1,9 +1,11 @@
-.profileScreen{
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+.profileScreen {
     height: 100vh;
     color: white;
 }
 
-.profileScreen_body{
+.profileScreen_body {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -13,35 +15,40 @@
     max-width: 800px;
 }
 
-.profileScreen_body h1{
-    font-size: 60px;
+.profileScreen_body h1 {
+    color: #23aaf2;
+    font-family: Lato;
+    text-align: left;
+    margin-top: 15px;
+    font-size: 3em;
     font-weight: 400;
     border-bottom: 1px solid #282c2d;
     margin-bottom: 20px;
 }
 
-.profileScreen_info{
+.profileScreen_info {
     display: flex;
 }
 
-.profileScreen_info img{
+.profileScreen_info img {
     height: 100px;
 }
 
-.profileScreen_details{
+.profileScreen_details {
     color: white;
     margin-left: 25px;
     flex: 1;
 }
 
-.profileScreen_details h2{
+.profileScreen_details h2 {
+    color: black;
     background-color: gray;
     padding: 15px;
     font-size: 15px;
     padding-left: 20px;
 }
 
-.profileScreen_signout{
+.profileScreen_signout {
     padding: 5px 20px;
     font-size: 1rem;
     margin-top: 2%;
@@ -52,11 +59,11 @@
     cursor: pointer;
 }
 
-.profileScreen_plans{
+.profileScreen_plans {
     margin-top: 20px;
 }
 
-.profileScreen_plans h3{
+.profileScreen_plans h3 {
     border-bottom: 1px solid #282c2d;
     padding-bottom: 10px;
 }

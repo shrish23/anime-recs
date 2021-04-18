@@ -1,4 +1,4 @@
-import React, { useRef} from "react";
+import React, { useRef } from "react";
 import { auth } from "./firebase";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
@@ -8,8 +8,6 @@ function Login() {
     const history = useHistory();
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    
-
     const signin = (e) => {
         e.preventDefault();
 
@@ -42,11 +40,14 @@ function Login() {
                 <button type="submit" onClick={signin}>
                     Sign In
                 </button>
-                <button type="submit" id="reg_btn" onClick={()=> history.push("/signup")}>
+                <button
+                    type="submit"
+                    id="reg_btn"
+                    onClick={() => history.push("/signup")}
+                >
                     Sign Up
                 </button>
             </form>
-            
         </div>
     );
 }
