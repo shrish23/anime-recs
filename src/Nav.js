@@ -31,7 +31,7 @@ function Nav({ username }) {
                 <div className="nav_avatar">
                     <IconButton onClick={handleClick}>
                         <Avatar
-                            src=""
+                            src={auth.currentUser.photoURL}
                             alt="https://img.pngio.com/free-anime-logo-maker-anime-logo-designs-creator-anime-logo-anime-logo-png-1000_1000.png"
                         />
                     </IconButton>
@@ -41,7 +41,7 @@ function Nav({ username }) {
                         open={Boolean(show)}
                         onClose={handleClose}
                     >
-                        <MenuItem className="menu_btn">{user.usname} </MenuItem>
+                        <MenuItem className="menu_btn">WELCOME {user.usname} </MenuItem>
                         <MenuItem
                             onClick={() => history.push(`/profile/${user.uid}`)}
                             className="menu_btn"

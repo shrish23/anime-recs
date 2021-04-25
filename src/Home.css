@@ -21,6 +21,7 @@ img.anime_posters_conatiner {
 .anime_posters_conatiner:hover .anime_posters,
 .anime_posters_conatiner:focus .anime_posters {
     transform: scale(1.2);
+    z-index: 1;
 }
 img.anime_posters {
     border-radius: 15px;

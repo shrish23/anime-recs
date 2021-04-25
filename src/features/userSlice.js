@@ -5,6 +5,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState:{
     user: null,
+    anime:[]
   },
 
   reducers: {
@@ -13,12 +14,17 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
+    },
+    animehandle: (state,action) =>{
+      state.anime = action.payload;
     }
   },  
 });
 
-export const { login,logout } = userSlice.actions;
+export const { login,logout,animehandle } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
+
+export const selectAnime = (state) => state.anime;
 
 export default userSlice.reducer;

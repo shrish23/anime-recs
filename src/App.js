@@ -10,6 +10,8 @@ import Signup from "./Signup";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/userSlice";
 import { auth } from "./firebase";
+import Page from "./Page";
+import Nav from "./Nav";
 
 function App() {
     const user = useSelector(selectUser);
@@ -58,6 +60,9 @@ function App() {
                     </Switch>
                 ) : (
                     <Switch>
+                        <Route path="/page">
+                            <Page username={user?.usname} />
+                        </Route>
                         <Route path="/profile">
                             <ProfileScreen />
                         </Route>

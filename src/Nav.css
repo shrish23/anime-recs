@@ -14,7 +14,7 @@
 }
 
 .nav_logo {
-    position: fixed;
+    position: absolute;
     top: 10px;
     left: 0px;
     width: 80px;
@@ -24,10 +24,11 @@
 }
 
 .nav_avatar {
-    right: 40px;
-    position: fixed;
+    right: 80px;
+    position: absolute;
     width: 30px;
     cursor: pointer;
+    object-fit: contain;
     top: 8px;
 }
 
