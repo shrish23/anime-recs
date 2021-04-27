@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import "./Page.css";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { auth } from "./firebase";
 import movieTrailer from "movie-trailer";
@@ -12,11 +12,12 @@ import { SlideDown } from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
 
 function Pages({ username }) {
-    const [open, setOpen] = useState(false);
-    const [malId, setMalId] = useState("");
+    const [loaded, setLoaded] = useState(false);
+    // const [malId, setMalId] = useState("");
     // USE malId TO ACCESS THE ID OF THE ANIME WHICH WILL BE AVILABLE AFTER CLICKING THE BUTTON. THE ID IS IN STRING SO IF YOU WANT YOU CAN CONVERT IT
     const [imageUrl, setImageUrl] = useState("");
-    const [animes, CurrentAnime] = useState([]);
+    const [animes, CurrentAnime] = useState({});
+    const [trailer, setTrailer] = useState("");
 
     const history = useHistory();
     const getUrlVars = function () {
@@ -35,28 +36,30 @@ function Pages({ username }) {
 
     var mal_id = getUrlVars()["id"];
     // console.log(mal_id);
-    var loaded = false;
+    // var loaded = false;
     useEffect(() => {
-        const getan = async () => {
-            var poster_container_div = "";
+        const getan =  () => {
+            // var poster_container_div = "";
 
-            $(function () {
+            $(async function () {
                 console.log(loaded);
-                if (loaded == false) {
-                    $.ajax({
+                if (loaded === false) {
+                   await $.ajax({
                         dataType: "json",
                         url: `https://api.jikan.moe/v4/anime/${mal_id}`,
                         method: "get",
                         success: function (response) {
                             CurrentAnime(response.data);
-                            loaded = true;
+                            setImageUrl(response.data.images.jpg.large_image_url);
+                            setTrailer(response.data.trailer.embed_url)
+                            setLoaded(true);
                             console.log(loaded);
                             //     poster_container_div = `<img id="backdrop" src="${response.data.images.jpg.large_image_url}" />
                             // <img id="poster" src="${response.data.images.jpg.large_image_url}" />`;
                             //     $("#poster_container").html(poster_container_div);
 
-                            console.log(response.data);
-                            // console.log(response.data.images);
+                            console.log(animes);
+                            console.log(response.data.images);
                         },
                     });
                 }
@@ -64,62 +67,53 @@ function Pages({ username }) {
         };
         getan();
 
-        const proc = () => {
-            const ur = new URLSearchParams(window.location.search);
-            // console.log(ur.get("id"));
-            if (imageUrl) {
-                setImageUrl("");
-                setMalId("");
-            } else {
-                setImageUrl(ur.get("ban"));
-                setMalId(ur.get("id"));
-            }
-            // console.log(malId);
-        };
-        return proc;
-    }, []);
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    // const handleClick = () => {
-    //   const ur = new URLSearchParams(window.location.search);
-    //   console.log(ur.get("id"));
-    //   if (malId) {
-    //     setMalId("");
-    //   } else {
-    //     setMalId(ur.get("id"));
-    //   }
-    //   console.log(malId);
-    // };
+        // const proc = () => {
+        //     const ur = new URLSearchParams(window.location.search);
+        //     // console.log(ur.get("id"));
+        //     if (imageUrl) {
+        //         setImageUrl("");
+        //         setMalId("");
+        //     } else {
+        //         setImageUrl(ur.get("ban"));
+        //         setMalId(ur.get("id"));
+        //     }
+        //     // console.log(malId);
+        // };
+        // return proc;
+    });
 
     return (
         <>
             <Nav username={username} />
             <div className="page_body">
-                {animes.images.jpg && (
+                
+                {animes ? (
                     <div id="poster_container">
                         <p id="title">{animes.title}</p>
+                        <Suspense fallback={<h1>LOADING....</h1>}>
                         <img
                             id="backdrop"
-                            src={animes.images.jpg.large_image_url}
+                            src={`${imageUrl}`}
+                            alt=""
                         />
+                        </Suspense>
                         <img
                             id="poster"
-                            src={animes.images.jpg.large_image_url}
+                            src={`${imageUrl}`}
+                            alt=""
                         />
+                        
                     </div>
-                )}
+                ):"LOADING"}
+                
+                
                 <div className="video_container">
                     <button className="page_btn" id="launch_btn">
                         LAUNCH TRAILER
                     </button>
                     <SlideDown>
                         <ReactPlayer
-                            url={animes.trailer.embed_url}
+                            url={trailer}
                             controls="True"
                         />
                     </SlideDown>
@@ -138,6 +132,5 @@ function Pages({ username }) {
     );
 }
 
-const Container = styled.div``;
 
 export default Pages;

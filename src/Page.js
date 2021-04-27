@@ -46,8 +46,8 @@ function Page({ username }) {
             <div className="page_body">
                 <div>
                     {/* <Container imageUrl></Container> */}
-                    <img id="backdrop" src={imageUrl} />
-                    <img id="poster" src={imageUrl} />
+                    <img id="backdrop" src={imageUrl} alt=""/>
+                    <img id="poster" src={imageUrl} alt=""/>
                 </div>
                 <div className="video_container">
                     <button
