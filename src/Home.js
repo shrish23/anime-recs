@@ -11,6 +11,9 @@ import { Redirect, useHistory } from "react-router";
 import { auth } from "./firebase";
 import Modals from "./components/Modal/Modal";
 import { Modal } from "@material-ui/core";
+import spinner from "./components/Spinner/Spinner";
+import Airanime from "./Airanime";
+import { Movie } from "@material-ui/icons";
 
 function Home({ username }) {
   const [open, setOpen] = useState(false);
@@ -21,59 +24,57 @@ function Home({ username }) {
   const history = useHistory();
 
   useEffect(() => {
-    $(async function () {
+    const getan = async () => {
       //Top anime
-      await $.ajax({
+       $.ajax({
         dataType: "json",
         url: "https://api.jikan.moe/v4/top/anime",
         method: "get",
-        success: function (responses) {
+        success:  function (responses) {
           //   console.log(responses);
           // let upcoming_anime = "";
           // $.each(responses.data, function (i, response) {
           //   // console.log(response);
-          //   upcoming_anime += `<div class="anime_posters_conatiner"><a href="/page?name=${response.title}"><img class="anime_posters" id="${response.mal_id}"src="${response.images.jpg.large_image_url}" title="${response.title}"/></a></div>`;
+          //   upcoming_anime += `<div class="anime_posters_conatiner" key={Math.random()}><img class="anime_posters" id="${response.mal_id}"src="${response.images.jpg.large_image_url}" title="${response.title}" onClick={() => history.push("/page/${response.mal_id}/?yid="${response.trailer.url}"&ban="${response.images.jpg.large_image_url}")}/></div>`;
           // });
           // $("#anime_top").html(upcoming_anime);
-          // console.log(responses.data);
+          console.log(responses.data);
           setAnimes(responses.data);
-          //   dispatch(
-          //     animehandle({
-          //       animes: responses.data,
-          //     })
-          //   );
+          console.log(animes);
         },
       });
       //Currently Airing
-      await $.ajax({
+      $.ajax({
         dataType: "json",
         url: "https://api.jikan.moe/v3/top/anime/0/airing",
         method: "get",
-        success: function (responses) {
+        success:  function (responses) {
           //   console.log(responses);
-          let upcoming_anime = "";
-          $.each(responses.top, function (i, response) {
-            // console.log(response);
-            upcoming_anime += `<div class="anime_posters_conatiner" ><img class="anime_posters" id="${response.mal_id}"src="${response.image_url}" title="${response.title}"></div>`;
-          });
-          $("#anime_airing").html(upcoming_anime);
-          setairAnimes(responses.data);
+          // let upcoming_anime = "";
+          // $.each(responses.top, function (i, response) {
+          //   // console.log(response);
+          //   upcoming_anime += `<div class="anime_posters_conatiner" ><img class="anime_posters" id="${response.mal_id}"src="${response.image_url}" title="${response.title}"></div>`;
+          // });
+          // $("#anime_airing").html(upcoming_anime);
+          setairAnimes(responses.top);
+          console.log(airanimes);
         },
       });
       //Anime movies
-      await $.ajax({
+       $.ajax({
         dataType: "json",
         url: "https://api.jikan.moe/v3/top/anime/0/movie",
         method: "get",
         success: function (responses) {
           //   console.log(responses);
-          let upcoming_anime = "";
-          $.each(responses.top, function (i, response) {
-            // console.log(response);
-            upcoming_anime += `<div class="anime_posters_conatiner"><img class="anime_posters"  id="${response.mal_id}"src="${response.image_url}" title="${response.title}"></div>`;
-          });
-          $("#anime_movies").html(upcoming_anime);
-          setmAnimes(responses.data);
+          // let upcoming_anime = "";
+          // $.each(responses.top, function (i, response) {
+          //   // console.log(response);
+          //   upcoming_anime += `<div class="anime_posters_conatiner"><img class="anime_posters"  id="${response.mal_id}"src="${response.image_url}" title="${response.title}"></div>`;
+          // });
+          // $("#anime_movies").html(upcoming_anime);
+          setmAnimes(responses.top);
+          console.log(responses.top);
         },
       });
 
@@ -107,8 +108,10 @@ function Home({ username }) {
           },
         });
       });
-    });
-  });
+    };
+
+    getan();
+  },[]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -151,41 +154,58 @@ function Home({ username }) {
         <hr></hr>
         <div id="anime_top">
           {animes.map((response) => (
-            <div class="anime_posters_conatiner" key={Math.random()}>
-              {/* <a href={`/page/${response.mal_id}/?yid="${response.trailer.url}"`}>             */}
+            <div className="anime_posters_conatiner" key={Math.random()}>
+             
               <img
-                class="anime_posters"
+                className="anime_posters"
                 id={`${response.mal_id}`}
                 src={`${response.images.jpg.large_image_url}`}
                 title={`${response.title}`}
                 alt=""
                 onClick={() => history.push(`/page/${response.mal_id}/?yid="${response.trailer.url}"&ban="${response.images.jpg.large_image_url}"`)}
               />
-              {/* </a> */}
-              {/* <Modals openprop={open}></Modals> */}
+              
             </div>
           ))}
         </div>
-        {/* <Modal
-          disablePortal
-          disableEnforceFocus
-          disableAutoFocus
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          HELLO
-        </Modal> */}
-
         <p class="headings">Airing Anime</p>
         <hr></hr>
 
         <div id="anime_airing">
+        {airanimes.map((response) => (
+            <div class="anime_posters_conatiner" key={Math.random()}>
+             
+              <img
+                class="anime_posters"
+                id={`${response.mal_id}`}
+                src={`${response.image_url}`}
+                title={`${response.title}`}
+                alt=""
+                onClick={() => history.push(`/pages/?id="${response.mal_id}"&ban="${response.image_url}"`)}
+              />
+              
+            </div>
+          ))}
         </div>
+        {/* <Airanime /> */}
         <p class="headings">Anime Movies</p>
         <hr></hr>
-        <div id="anime_movies"></div>
+        <div id="anime_movies">
+        {manimes.map((response) => (
+            <div class="anime_posters_conatiner" key={Math.random()}>
+             
+              <img
+                class="anime_posters"
+                id={`${response.mal_id}`}
+                src={`${response.image_url}`}
+                title={`${response.title}`}
+                alt=""
+                onClick={() => history.push(`/pages/?id="${response.mal_id}"&ban="${response.image_url}"`)}
+              />
+              
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

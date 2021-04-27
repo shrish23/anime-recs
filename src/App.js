@@ -12,6 +12,7 @@ import { login, logout, selectUser } from "./features/userSlice";
 import { auth } from "./firebase";
 import Page from "./Page";
 import Nav from "./Nav";
+import Pages from "./Pages";
 
 function App() {
     const user = useSelector(selectUser);
@@ -60,6 +61,9 @@ function App() {
                     </Switch>
                 ) : (
                     <Switch>
+                        <Route path="/pages">
+                            <Pages username={user?.usname} />
+                        </Route>
                         <Route path="/page">
                             <Page username={user?.usname} />
                         </Route>

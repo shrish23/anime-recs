@@ -31,7 +31,7 @@ function Nav({ username }) {
                 <div className="nav_avatar">
                     <IconButton onClick={handleClick}>
                         <Avatar
-                            src={auth.currentUser.photoURL}
+                            src={auth.currentUser ? auth.currentUser.photoURL : ""}
                             alt="https://img.pngio.com/free-anime-logo-maker-anime-logo-designs-creator-anime-logo-anime-logo-png-1000_1000.png"
                         />
                     </IconButton>

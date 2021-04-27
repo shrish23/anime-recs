@@ -51,7 +51,7 @@ function ProfileScreen() {
             });
         }
       );
-      window.location.reload();
+      // window.location.reload();
     } else {
       alert("Please Select A Image File");
     }
@@ -68,7 +68,8 @@ function ProfileScreen() {
             <h2>Email :       {user.email}</h2>
             <h2>UserName:       {user.usname}</h2>
             <h2>Upload Your Profile Picture Here</h2>
-            <Input type="file" accept="image/*" placeholder="Upload Your Profile Picture" onChange={handleImageUpload} />
+            {/* <Input type="file" accept="image/*" placeholder="Upload Your Profile Picture" onChange={handleImageUpload} /> */}
+            <input type="file" accept="image/*" onChange={handleImageUpload} />
             {/* <button type="submit" onClick={createurl}>
               UPLOAD
             </button> */}
