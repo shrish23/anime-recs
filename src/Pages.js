@@ -20,32 +20,32 @@ function Pages({ username }) {
       // console.log(ur.get("id"));
       if (imageUrl) {
         setImageUrl("");
-        
+        setMalId("");
       } else {
         setImageUrl(ur.get("ban"));
-        
+        setMalId(ur.get("id"));
       }
       console.log(malId);
     };
     return proc;
   });
 
-  const handleClick = () => {
-    const ur = new URLSearchParams(window.location.search);
-    console.log(ur.get("id"));
-    if (malId) {
-      setMalId("");
-    } else {
-      setMalId(ur.get("id"));
-    }
-    console.log(malId);
-  };
+  // const handleClick = () => {
+  //   const ur = new URLSearchParams(window.location.search);
+  //   console.log(ur.get("id"));
+  //   if (malId) {
+  //     setMalId("");
+  //   } else {
+  //     setMalId(ur.get("id"));
+  //   }
+  //   console.log(malId);
+  // };
 
   return (
     <Container img={imageUrl}>
       <Nav username={username} />
       <div className="page_body">
-        <Button variant="contained" color="primary" onClick={handleClick}>
+        <Button variant="contained" color="primary">
           LAUNCH TRAILER
         </Button>
         <div>

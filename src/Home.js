@@ -162,7 +162,7 @@ function Home({ username }) {
                 src={`${response.images.jpg.large_image_url}`}
                 title={`${response.title}`}
                 alt=""
-                onClick={() => history.push(`/page/${response.mal_id}/?yid="${response.trailer.url}"&ban="${response.images.jpg.large_image_url}"`)}
+                onClick={() => history.push(`/page/${response.mal_id}/?yid="${response.trailer.url}"&ban=${response.images.jpg.large_image_url}`)}
               />
               
             </div>
@@ -181,7 +181,7 @@ function Home({ username }) {
                 src={`${response.image_url}`}
                 title={`${response.title}`}
                 alt=""
-                onClick={() => history.push(`/pages/?id="${response.mal_id}"&ban="${response.image_url}"`)}
+                onClick={() => history.push(`/pages/?id=${response.mal_id}&ban=${response.image_url}`)}
               />
               
             </div>
@@ -200,7 +200,7 @@ function Home({ username }) {
                 src={`${response.image_url}`}
                 title={`${response.title}`}
                 alt=""
-                onClick={() => history.push(`/pages/?id="${response.mal_id}"&ban="${response.image_url}"`)}
+                onClick={() => history.push(`/pages/?id=${response.mal_id}&ban=${response.image_url}`)}
               />
               
             </div>
