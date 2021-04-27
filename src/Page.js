@@ -15,20 +15,23 @@ import "react-slidedown/lib/slidedown.css";
 function Page({ username }) {
     const [trailerUrl, setTrailerUrl] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+    const [title,setTitle] = useState("");
     const history = useHistory();
 
     useEffect(() => {
         const proc = () => {
             const ur = new URLSearchParams(window.location.search);
             // console.log(ur.get("yid"));
-            if (imageUrl) {
+            if (imageUrl && title) {
                 setImageUrl("");
+                setTitle("");
             } else {
                 setImageUrl(ur.get("ban"));
+                setTitle(ur.get("title"));
             }
         };
         return proc;
-    });
+    },[]);
 
     const useQuery = () => {
         const ur = new URLSearchParams(window.location.search);
@@ -46,6 +49,7 @@ function Page({ username }) {
             <div className="page_body">
                 <div>
                     {/* <Container imageUrl></Container> */}
+                    <p id="title">{title}</p>
                     <img id="backdrop" src={imageUrl} alt=""/>
                     <img id="poster" src={imageUrl} alt=""/>
                 </div>
