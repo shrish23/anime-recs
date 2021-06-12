@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 .page_body {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
-    width: 50%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     padding-top: 8%;
-    max-width: 800px;
+    /* max-width: 800px; */
 }
 .page_btn {
     font-family: "Lato", sans-serif;
@@ -67,10 +67,10 @@
     /* object-fit: cover; */
     filter: blur(35px) contrast(105%) brightness(120%);
 }
-.video_container {
-    position: absolute;
+/* .video_container {
+    position: relative;
     top: 700px;
-}
+} */
 #title {
     position: absolute;
     bottom: 30px;
@@ -80,5 +80,73 @@
     text-shadow: 1.5px 3.5px black;
     font-weight: 600;
     font-size: 2.6em;
+    /* position: absolute; */
+}
+
+/* #synopsis {
+    position: relative;
+} */
+
+.page_content {
+    font-family: "Lato", sans-serif;
+    text-align: justify;
+    text-justify: inter-word;
+    display: flex;
+    margin: 0px 30px 20px 0;
+    line-height: 1.5;
+    flex-direction: column;
     position: absolute;
+    top: 75%;
+    left: 25%;
+    font-size: 1.1em;
+}
+.statistics {
+    font-family: "Lato", sans-serif;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    left: 4%;
+    width: 275px;
+    font-size: 0.9em;
+    padding: 10px 8px 10px 14px;
+    background-color: #d9d9d9;
+    border-radius: 15px;
+    box-shadow: -3.5px -5px 4px 2px #42d2f3;
+}
+.page_content > div {
+    margin: 10px 0px 10px 0px;
+}
+.content_headings {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.genre {
+    background-color: #0cbfe9;
+    color: whitesmoke;
+    padding: 5px;
+    margin-left: 8px;
+    border-radius: 10px;
+}
+.studio {
+    background-color: orange;
+}
+.producer {
+    background-color: rgb(173, 11, 173);
+}
+.licensor {
+    background-color: #ff6666;
+}
+#cal_icon {
+    color: grey;
+    vertical-align: middle;
+}
+.statistics_heading {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 1px;
+}
+.statistics > div {
+    margin: 8px 2px 8px 0px;
 }

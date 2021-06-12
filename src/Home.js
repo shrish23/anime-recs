@@ -179,7 +179,7 @@ function Home({ username }) {
                                 alt=""
                                 onClick={() =>
                                     history.push(
-                                        `/page/${response.mal_id}/?id=${response.mal_id}&yid="${response.trailer.url}"&ban=${response.images.jpg.large_image_url}`
+                                        `/pages/?id=${response.mal_id}&ban=${response.images.jpg.large_image_url}`
                                     )
                                 }
                             />
