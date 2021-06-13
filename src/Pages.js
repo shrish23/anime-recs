@@ -98,7 +98,27 @@ function Pages({ username }) {
                             console.log("2" + month_to);
                         },
                     });
+                    await $.ajax({
+                        dataType: "json",
+                        method: "get",
+                        url: `https://api.jikan.moe/v4/anime/${mal_id}/recommendations`,
+                        success: function (responses) {
+                            let output = "";
+                            $.each(responses.data, function (i, recomm) {
+                                console.log(recomm.entry);
+                                output += `<div class="anime_posters_conatiner"><img class="anime_posters"  id="${recomm.entry.mal_id}"src="${recomm.entry.images.jpg.image_url}" title="${recomm.entry.title}"></div>`;
+                                return i < 4;
+                            });
+                            // console.log(response);
+                            $("#recommendations_tab").html(output);
+                        },
+                    });
                 }
+            });
+            $("#recommendations_tab").on("click", "div img", function () {
+                console.log($(this).attr("id"));
+                var id_img = $(this).attr("id");
+                window.location.href = `http://localhost:3000/pages/${id_img}/?id=${id_img}`;
             });
         };
         getan();
@@ -252,12 +272,21 @@ function Pages({ username }) {
 
                     <div id="score">
                         <p className="content_headings">Rating</p>
-                        <span
-                            className="genre"
-                            style={{ backgroundColor: "#00e600" }}
-                        >
-                            {animes.score}
-                        </span>
+                        {animes.score ? (
+                            <span
+                                className="genre"
+                                style={{ backgroundColor: "#00e600" }}
+                            >
+                                {animes.score}
+                            </span>
+                        ) : (
+                            <span
+                                className="genre"
+                                style={{ backgroundColor: "grey" }}
+                            >
+                                <i>NA</i>
+                            </span>
+                        )}
                     </div>
 
                     {animes.broadcast ? (
@@ -265,11 +294,17 @@ function Pages({ username }) {
                             <p className="content_headings">
                                 Broadcasting Schedule
                             </p>
-
-                            <span>
-                                <TodayIcon id="cal_icon" />
-                                {animes.broadcast.string}
-                            </span>
+                            {animes.broadcast.string ? (
+                                <span>
+                                    <TodayIcon id="cal_icon" />
+                                    {animes.broadcast.string}
+                                </span>
+                            ) : (
+                                <span>
+                                    <TodayIcon id="cal_icon" />
+                                    NA
+                                </span>
+                            )}
                         </div>
                     ) : (
                         "LOADING"
@@ -303,9 +338,9 @@ function Pages({ username }) {
                     ) : (
                         "LOADING"
                     )}
-                    {animes.licensors ? (
-                        <div id="licensors">
-                            <p className="content_headings">Licensors</p>
+                    <div id="licensors">
+                        <p className="content_headings">Licensors</p>
+                        {animes.licensors ? (
                             <p>
                                 {animes.licensors.map((licensor) => (
                                     <span className="genre licensor">
@@ -313,10 +348,15 @@ function Pages({ username }) {
                                     </span>
                                 ))}
                             </p>
-                        </div>
-                    ) : (
-                        "LOADING"
-                    )}
+                        ) : (
+                            <span
+                                className="genre"
+                                style={{ backgroundColor: "grey" }}
+                            >
+                                <i>NA</i>
+                            </span>
+                        )}
+                    </div>
                     <div className="video_container">
                         <button className="page_btn" id="launch_btn">
                             LAUNCH TRAILER
@@ -336,6 +376,10 @@ function Pages({ username }) {
                             Back
                         </button>
                     </div>
+                    <br></br>
+                    {/* recommendations container */}
+                    <p className="content_headings">Recommendations</p>
+                    <div id="recommendations_tab"></div>
                 </div>
             </div>
         </>

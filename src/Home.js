@@ -117,6 +117,11 @@ function Home({ username }) {
                     },
                 });
             });
+            $("#anime_tab").on("click", "div img", function () {
+                console.log($(this).attr("id"));
+                var id_img = $(this).attr("id");
+                window.location.href = `http://localhost:3000/pages/${id_img}/?id=${id_img}`;
+            });
         };
 
         getan();

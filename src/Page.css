@@ -150,3 +150,41 @@
 .statistics > div {
     margin: 8px 2px 8px 0px;
 }
+
+/* recommendation images */
+img.anime_posters_conatiner {
+    width: 100%;
+    height: 100%;
+    transition: 0.5s all ease;
+}
+.anime_posters_conatiner:hover .anime_posters,
+.anime_posters_conatiner:focus .anime_posters {
+    transform: scale(1.2);
+    z-index: 1;
+}
+img.anime_posters {
+    border-radius: 15px;
+    /* display: inline-block; */
+    transition: 0.5s;
+    width: 185px;
+    height: 265px;
+    object-fit: cover;
+}
+.anime_posters_conatiner {
+    border-radius: 15px;
+    margin: 20px 0px 10px 28px;
+    width: 185px;
+    height: 265px;
+    display: inline-block;
+    overflow: hidden;
+}
+#recommendations_tab {
+    position: relative;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    background-color: #d9d9d9;
+    border-radius: 30px;
+    padding: 14px 10px 14px 10px;
+    box-shadow: 3.5px 5px 4px 2px #42d2f3;
+}
