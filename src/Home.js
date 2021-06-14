@@ -166,7 +166,7 @@ function Home({ username }) {
           >
             HELLO
           </Modal>
-        )} */}
+         )} */}
 
                 {/* {open ? <SimpleModal/> : <></>} */}
                 <hr></hr>

@@ -139,9 +139,9 @@ function Pages({ username }) {
     });
 
     return (
-        <>
-            {/* <Nav username={username} /> */}
-            <Nav />
+        <div>
+            <Nav username={username} />
+            {/* <Nav /> */}
             <div className="page_body">
                 {animes ? (
                     <div id="poster_container">
@@ -382,7 +382,7 @@ function Pages({ username }) {
                     <div id="recommendations_tab"></div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
